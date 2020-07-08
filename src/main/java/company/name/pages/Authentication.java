@@ -15,7 +15,6 @@ public class Authentication extends AbstractPage {
     private By passwordField = cssSelector("[type=password]");                      // поле для ввода пароля
     private By clickLogIn = cssSelector("[ng-tr=\"WHE1.WHE4\"]");                   // Кнопка войти в аккаунт
     private By clickLogOut = cssSelector("#logout");                                // Кнопка выйти
-
     /**
      * Конструктор. Загружает ссылку на тест-стенд из файла конфигурации и подгружает указанные веб-элементы
      */
