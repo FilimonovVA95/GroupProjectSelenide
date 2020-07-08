@@ -29,48 +29,43 @@ public class AuthenticationPage extends AbstractPage {
     @Step("Открыть тестовый стенд")
     public void openTestStand() {
         Selenide.open(getStand());
-        checkAndScreenShot("Проверяем активность кнопки 'Войти'", checkLoginButton(), "Open test stand exception");
+        checkAndScreenShot("Проверяем активность кнопки 'Войти'",
+                checkLoginButton(), "Open test stand exception");
     }
 
-    /**
-     * Открывает окно авторизации
-     */
+    @Step("Нажать кнопку 'Войти'")
     public void openPopUp() {
         $(loginButton).click();
-
-        checkAndScreenShot();
+        checkAndScreenShot("Проверяем открытие окна авторизации",
+                checkClickLogIn(), "Open popUp exception");
     }
 
-    /**
-     * Заполняет поле email
-     * @param email строка содержащая корректный email
-     */
+    @Step("Ввести e-mail")
     public void inputEmail (String email) {
         $(loginFiled).sendKeys(email);
-
-        checkAndScreenShot();
+        checkAndScreenShot("Проверяем правильность ввода email",
+                checkLoginField(email), "Input email authorization exception");
     }
 
-    /**
-     * Заполняет поле пароля
-     * @param password строка содержащая корректный пароль
-     */
+    @Step("Ввести пароль")
     public void inputPassword(String password) {
         $(passwordField).sendKeys(password);
+        checkAndScreenShot("Проверяем правильность ввода пароля",
+                checkPasswordField(password), "Input password authorization exception");
     }
 
-    /**
-     * Нажимает кнопку "Войти"
-     */
+    @Step("Нажать кнопку войти")
     public void clickAuthentication(){
         $(clickLogIn).click();
+        checkAndScreenShot("Проверяем активность кнопки 'Выйти'",
+                checkClickLogOut(), "Client login exception");
     }
 
-    /**
-     * Нажимаем кнопку "Выйти"
-     */
+    @Step("Нажать кнопку выйти")
     public void logOut(){
         $(clickLogOut).click();
+        checkAndScreenShot("Проверяем активность кнопки 'Войти'",
+                checkLoginButton(), "Client LogOut exception");
     }
 
     /**

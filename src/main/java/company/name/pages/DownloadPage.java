@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 
@@ -14,7 +15,7 @@ import java.io.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.openqa.selenium.By.cssSelector;
 
-public class Download extends AbstractPage {
+public class DownloadPage extends AbstractPage {
 
     private By loginButton = cssSelector("#header-lk-button");  // кнопка открытия окна авторизации
     private By forgotPassword = cssSelector("[ng-tr=\"WHE.WHE23\"]");
@@ -26,37 +27,43 @@ public class Download extends AbstractPage {
     /**
      * Конструктор. Загружает ссылку на тест-стенд из файла конфигурации и подгружает указанные веб-элементы
      */
-    public Download() {
+    public DownloadPage() {
         super();
     }
 
-    /**
-     * Открытие тест стенда
-     */
+    @Step("Открыть тестовый стенд")
     public void openTestStand() {
-        Selenide.open(testStand);
+        Selenide.open(getStand());
+        checkAndScreenShot("Проверяем активность кнопки 'Войти'",
+                checkLoginButton(), "'Login' button not active");
     }
 
-    /**
-     * Открывает окно авторизации
-     */
+    @Step("Нажать кнопку 'Войти'")
     public void openPopUp() {
         $(loginButton).click();
+        checkAndScreenShot("Проверяем активность кнопки 'Забыли пароль'",
+                checkForgotPassword(), "The 'Forgot Password' button is inactive");
     }
 
+    @Step("Нажать кнопку 'Зарегистрироватся'")
     public void clickRegistrationButton() {
         $(registrationButton).click();
+        checkAndScreenShot("Проверяем активность кнопки 'Стать клиентом'",
+                checkNewRegistrationClientButton(),"The 'Become a customer' button is inactive");
     }
 
-    /**
-     *
-     */
+    @Step("Нажать кнопку 'Стать клиентом'")
     public void clickRegistrationClient() {
         $(registrationClient).click();
+        checkAndScreenShot("Проверяем активность кнопки 'Зарегистрироватся'",
+                checkRegistrationClientOnFieldRegistration(), "'Register' button is not active");
     }
 
+    @Step("Нажать Кнопку 'Условия передачи информации'")
     public void clickDownloadButton() {
         $(downloadButton).click();
+        checkAndScreenShot("Проверяем наличие 'Условия передачи информации' в файле",
+                downloadAndReads("Условия передачи информации"), "Read file exception");
     }
 
     /**

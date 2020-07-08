@@ -2,14 +2,12 @@ package company.name.positive;
 
 import com.codeborne.selenide.Configuration;
 import company.name.pages.AuthenticationPage;
-import company.name.positive.steps.AuthenticationClientPositiveStep;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
  * Тест проверяет возможность войти с заданными логином и паролем
  * @author Филимонов Виктор
- * @see AuthenticationClientPositiveStep
  */
 public class AuthenticationClient {
 
@@ -26,10 +24,10 @@ public class AuthenticationClient {
     @Test
     public void authenticationClient() {
         step.openTestStand();
-        step.openPopUpStep();
-        step.inputEmailStep(email);
-        step.inputPasswordStep(password);
-        step.clickAuthenticationStep();
-        step.logOutStep();
+        step.openPopUp();
+        step.inputEmail(email);
+        step.inputPassword(password);
+        step.clickAuthentication();
+        step.logOut();
     }
 }
