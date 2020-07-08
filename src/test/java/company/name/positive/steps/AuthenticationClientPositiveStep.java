@@ -1,6 +1,6 @@
 package company.name.positive.steps;
 
-import company.name.pages.Authentication;
+import company.name.pages.AuthenticationPage;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
@@ -11,7 +11,7 @@ import static io.qameta.allure.Allure.step;
  */
 public class AuthenticationClientPositiveStep extends AbstractPositiveStep {
 
-    private Authentication authentication = new Authentication();
+    private AuthenticationPage authentication = new AuthenticationPage();
 
     @Step("Открыть тестовый стенд")
     public void openTestStandStep() {

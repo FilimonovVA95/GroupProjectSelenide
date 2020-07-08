@@ -1,14 +1,18 @@
 package company.name.pages;
 
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.testng.Assert;
+
 import static com.codeborne.selenide.Selenide.$;
+import static io.qameta.allure.Allure.step;
 import static org.openqa.selenium.By.cssSelector;
 
 /**
  * Класс страницы для авторизации клиента
  */
-public class Authentication extends AbstractPage {
+public class AuthenticationPage extends AbstractPage {
 
     private By loginButton = cssSelector("#header-lk-button");                      // кнопка открытия окна авторизации
     private By loginFiled = cssSelector("#login");                                  // поле для ввода логина при входе
@@ -18,15 +22,14 @@ public class Authentication extends AbstractPage {
     /**
      * Конструктор. Загружает ссылку на тест-стенд из файла конфигурации и подгружает указанные веб-элементы
      */
-    public Authentication () {
+    public AuthenticationPage() {
         super();
     }
 
-    /**
-     * Открытие тест стенда
-     */
+    @Step("Открыть тестовый стенд")
     public void openTestStand() {
-        Selenide.open(testStand);
+        Selenide.open(getStand());
+        checkAndScreenShot("Проверяем активность кнопки 'Войти'", checkLoginButton(), "Open test stand exception");
     }
 
     /**
@@ -34,6 +37,8 @@ public class Authentication extends AbstractPage {
      */
     public void openPopUp() {
         $(loginButton).click();
+
+        checkAndScreenShot();
     }
 
     /**
@@ -42,6 +47,8 @@ public class Authentication extends AbstractPage {
      */
     public void inputEmail (String email) {
         $(loginFiled).sendKeys(email);
+
+        checkAndScreenShot();
     }
 
     /**

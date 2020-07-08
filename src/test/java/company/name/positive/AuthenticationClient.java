@@ -1,6 +1,7 @@
 package company.name.positive;
 
 import com.codeborne.selenide.Configuration;
+import company.name.pages.AuthenticationPage;
 import company.name.positive.steps.AuthenticationClientPositiveStep;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,7 +16,7 @@ public class AuthenticationClient {
     private String email = "kicoti9729@kartk5.com";     // Почта заранее зарагестрированного пользователя
     private String password = "QlwS1Z";                 // Пароль от личного кабинета клиента
 
-    private AuthenticationClientPositiveStep step = new AuthenticationClientPositiveStep();
+    private AuthenticationPage step = new AuthenticationPage();
 
     @BeforeMethod
     public void start(){
@@ -24,7 +25,7 @@ public class AuthenticationClient {
 
     @Test
     public void authenticationClient() {
-        step.openTestStandStep();
+        step.openTestStand();
         step.openPopUpStep();
         step.inputEmailStep(email);
         step.inputPasswordStep(password);

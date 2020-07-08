@@ -2,12 +2,16 @@ package company.name.pages;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.parser.PdfTextExtractor;
+import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
+import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 
 import java.io.*;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.element;
 import static org.openqa.selenium.By.cssSelector;
 
 public class Download extends AbstractPage {
@@ -83,15 +87,42 @@ public class Download extends AbstractPage {
         return $(registrationClientOnFieldRegistration).isEnabled();
     }
 
-    public void downloadAndReads() {
-        String filePath = "./Download";
+    public boolean downloadAndReads(String message) {
+        String filePath = ".\\Download\\";
         Configuration.reportsFolder = filePath;
-        File file = null;
+        String fullName = null;
+        String text = null;
+
+        File file;
         try {
-            file = element(downloadButton).download();
+            file = $(downloadButton).download();
+            fullName = ".\\" + file.getPath();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        PdfReader reader = null;
+        try {
+            reader = new PdfReader(fullName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 1; i <= reader.getNumberOfPages(); ++i) {
+            TextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+            try {
+                text = PdfTextExtractor.getTextFromPage(reader, i, strategy);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        reader.close();
+        try {
+            FileUtils.deleteDirectory(new File(".\\build\\downloads"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return text.contains(message);
     }
 }
 

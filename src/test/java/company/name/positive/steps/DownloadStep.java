@@ -48,6 +48,9 @@ public class DownloadStep extends AbstractPositiveStep{
     }
     @Step("Нажать Кнопку 'Условия передачи информации'")
     public void downloadAndReadsStep(){
-        downloadStep.downloadAndReads();
+        step("Проверяем наличие 'Условия передачи информации' в файле", () -> {
+            Assert.assertTrue(downloadStep.downloadAndReads("Условия передачи информации"), "Read file exception");
+        });
+        screenShotStep();
     }
 }
