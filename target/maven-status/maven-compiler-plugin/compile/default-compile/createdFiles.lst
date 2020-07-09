@@ -1,2 +1,3 @@
-company\name\pages\Authentication.class
 company\name\pages\AbstractPage.class
+company\name\pages\DownloadPage.class
+company\name\pages\AuthenticationPage.class

@@ -3,10 +3,8 @@ package company.name.pages;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 
 import static com.codeborne.selenide.Selenide.$;
-import static io.qameta.allure.Allure.step;
 import static org.openqa.selenium.By.cssSelector;
 
 /**

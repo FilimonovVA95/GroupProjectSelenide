@@ -1,3 +1,2 @@
-company\name\positive\steps\AbstractPositiveStep.class
-company\name\positive\AuthenticationClient.class
-company\name\positive\steps\AuthenticationClientPositiveStep.class
+company\name\positive\DownloadPageTest.class
+company\name\positive\AuthenticationClientTest.class

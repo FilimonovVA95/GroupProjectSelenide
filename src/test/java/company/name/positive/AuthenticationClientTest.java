@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
  * Тест проверяет возможность войти с заданными логином и паролем
  * @author Филимонов Виктор
  */
-public class AuthenticationClient {
+public class AuthenticationClientTest {
 
     private String email = "kicoti9729@kartk5.com";     // Почта заранее зарагестрированного пользователя
     private String password = "QlwS1Z";                 // Пароль от личного кабинета клиента

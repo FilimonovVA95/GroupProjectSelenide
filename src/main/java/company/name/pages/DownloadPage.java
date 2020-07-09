@@ -94,6 +94,11 @@ public class DownloadPage extends AbstractPage {
         return $(registrationClientOnFieldRegistration).isEnabled();
     }
 
+    /**
+     *
+     * @param message
+     * @return
+     */
     public boolean downloadAndReads(String message) {
         String filePath = ".\\Download\\";
         Configuration.reportsFolder = filePath;
